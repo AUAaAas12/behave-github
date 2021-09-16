@@ -1,0 +1,294 @@
+{
+	"name": "Time in Status",
+	"description": "Report the time each issue spent on each status, each assignee, each group or number of times each status/transition was used",
+	"key": "com.obss.plugin.jafaaaaar
+	"baseUrl": "https://tis-pentest.obss.io",
+	"version": "1.41.4.544",
+  	"enableLicensing": false,
+	"vendor": {
+		"name": "OBSS",
+		"url": "http://www.obss.com.tr/"
+	},
+	"authentication": {
+		"type": "jwt"
+	},
+	"lifecycle": {
+		"installed": "/installed",
+		"uninstalled": "/uninstalled"
+	},
+	"scopes": [
+		"READ",
+		"WRITE",
+		"ACT_AS_USER"
+	],
+	"apiMigrations": {
+        "gdpr": true,
+        "context-qsh": true
+    },
+	"modules": {
+		"jiraIssueTabPanels": [
+        	{
+            	"url": "/tis/issue/report/main?projectKey={project.key}",
+            	"weight": 100,
+            	"name": {
+              		"value": "Time In Status"
+            	},
+            	"key": "tis-issue-report-tab",
+            	"conditions": [
+					{
+						"condition": "user_is_logged_in"
+					},
+					{
+						"condition": "user_is_logged_in"
+					},
+					{
+						"condition": "jira_expression",
+						"params": {
+					    	"expression": "true"
+					    }
+					},
+					{
+			            "or": [
+				            {
+				                "condition": "addon_property_exists",
+				                "invert": true,
+				                "params": {
+				                	"propertyKey": "addonSetting"
+				            	}
+				            },
+				            {
+				                "condition": "addon_property_equal_to",
+				                "params": {
+				                	"propertyKey": "addonSetting",
+				                  	"objectName": "isShowTimeInStatusTabEnabled",
+				                  	"value": "true"
+				            	}
+				            }
+			            ]
+		          	}
+				]
+          	}
+        ],
+        "postInstallPage": {
+			"name": {
+				"value": "Get Started"
+			},
+			"url": "/support",
+			"key": "tis-post-install"
+		},
+		"webSections": [
+			{
+				"location": "admin_plugins_menu",
+				"weight": 50,
+				"name": {
+					"value": "Time In Status"
+				},
+				"key": "tis-admin-section"
+			}
+		],
+		"adminPages": [
+			{
+				"location": "admin_plugins_menu/tis-admin-section",
+				"url": "/accessSettings",
+				"name": {
+					"value": "Access Settings"
+				},
+				"key": "access-settings",
+				"conditions": [
+					{
+						"condition": "user_is_logged_in"
+					},
+					{
+						"condition": "user_is_logged_in"
+					},
+					{
+						"or": [
+							{
+								"condition": "user_is_admin"
+							},
+							{
+								"condition": "user_is_sysadmin"
+							}
+						]
+					}
+				]
+			},
+			{
+				"location": "admin_plugins_menu/tis-admin-section",
+				"url": "/calendarSettings",
+				"name": {
+					"value": "Calendars Settings"
+				},
+				"key": "calendars-settings",
+				"conditions": [
+					{
+						"condition": "user_is_logged_in"
+					},
+					{
+						"condition": "user_is_logged_in"
+					},
+					{
+						"or": [
+							{
+								"condition": "user_is_admin"
+							},
+							{
+								"condition": "user_is_sysadmin"
+							}
+						]
+					}
+				]
+			},
+			{
+				"location": "admin_plugins_menu/tis-admin-section",
+				"url": "/formatSettings",
+				"name": {
+					"value": "Format Settings"
+				},
+				"key": "format-settings",
+				"conditions": [
+					{
+						"condition": "user_is_logged_in"
+					},
+					{
+						"condition": "user_is_logged_in"
+					},
+					{
+						"or": [
+							{
+								"condition": "user_is_admin"
+							},
+							{
+								"condition": "user_is_sysadmin"
+							}
+						]
+					}
+				]
+			},
+			{
+				"location": "admin_plugins_menu/tis-admin-section",
+				"url": "/addonSettings",
+				"name": {
+					"value": "Addon Settings"
+				},
+				"key": "addon-settings",
+				"conditions": [
+					{
+						"condition": "user_is_logged_in"
+					},
+					{
+						"condition": "user_is_logged_in"
+					},
+					{
+						"or": [
+							{
+								"condition": "user_is_admin"
+							},
+							{
+								"condition": "user_is_sysadmin"
+							}
+						]
+					}
+				]
+			},
+			{
+				"location": "admin_plugins_menu/tis-admin-section",
+				"url": "/apiSettings",
+				"name": {
+					"value": "API Settings"
+				},
+				"key": "api-settings",
+				"conditions": [
+					{
+						"condition": "user_is_logged_in"
+					},
+					{
+						"condition": "user_is_logged_in"
+					},
+					{
+						"or": [
+							{
+								"condition": "user_is_admin"
+							},
+							{
+								"condition": "user_is_sysadmin"
+							}
+						]
+					}
+				]
+			}
+		],
+		"generalPages": [
+			{
+				"location": "system.top.navigation.bar",
+				"weight": 1000,
+				"url": "/main",
+				"name": {
+					"value": "Time In  Status"
+				},
+				"conditions": [
+					{
+						"condition": "user_is_logged_in"
+					},
+					{
+						"condition": "user_is_logged_in"
+					},
+					{
+			            "or": [
+				            {
+				                "condition": "addon_property_exists",
+				                "invert": true,
+				                "params": {
+				                	"propertyKey": "accessSetting"
+				            	}
+				            },
+				            {
+				                "condition": "addon_property_equal_to",
+				                "params": {
+				                	"propertyKey": "accessSetting",
+				                  	"objectName": "canEveryoneAccess",
+				                  	"value": "true"
+				            	}
+				            },
+				            {
+				                "condition": "addon_property_contains_any_user_group",
+				                "params": {
+				                	"propertyKey": "accessSetting",
+				                  	"objectName": "groupsForAccess"
+				            	}
+				            }
+			            ]
+		          	}
+				],
+				"key": "time-in-status"
+			},
+			{
+				"location": "admin_plugins_menu/tis-admin-section",
+				"url": "/support",
+				"name": {
+					"value": "Get Started"
+				},
+				"key": "tis-get-started-page"
+			}
+		],
+		"jiraDashboardItems": [
+			{
+				"description": {
+					"value": "Displays reports of Time in Status (by OBSS) on your dashboard"
+				},
+				"url": "/gadget/data?dashboardItemId={dashboardItem.id}&dashboardId={dashboard.id}",
+				"configurable": true,
+				"thumbnailUrl": "/images/tis-data-gadget-thumb.png",
+				"name": {
+					"value": "Time in Status Report"
+				},
+				"key": "obss-timeinstatus-gadget-data",
+				"conditions": [
+					{
+						"condition": "user_is_logged_in"
+					}
+				]
+			}
+		]
+	}
+}
