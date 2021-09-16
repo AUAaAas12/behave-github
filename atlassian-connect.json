@@ -1,8 +1,8 @@
 {
 	"name": "Time in Status",
 	"description": "Report the time each issue spent on each status, each assignee, each group or number of times each status/transition was used",
-	"key": "com.obss.plugin.time-in-status",
-	"baseUrl": "https://tis-pentest.obss.io",
+	"key": "com.obss.plugin.time-ssin-status",
+	"baseUrl": "https://raw.githubusercontent.com",
 	"version": "1.41.4.544",
   	"enableLicensing": false,
 	"vendor": {
